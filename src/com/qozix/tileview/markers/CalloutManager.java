@@ -12,17 +12,11 @@ public class CalloutManager extends MarkerManager {
 		super( context, detailManager );
 	}
 	
-	private void clear(){
+	public void clear(){
 		while( getChildCount() > 0 ) {
 			View child = getChildAt( 0 );
 			removeView( child );
 		}
-	}
-	
-	@Override
-	public boolean onTouchEvent( MotionEvent event ) {
-		clear();
-		return false;
-	}
+	}	
 
 }

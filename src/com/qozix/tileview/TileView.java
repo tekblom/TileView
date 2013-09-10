@@ -864,6 +864,7 @@ public class TileView extends ZoomPanLayout {
 		}
 		@Override
 		public void onTap( Point point ) {
+			calloutManager.clear();
 			markerManager.processHit( point );
 			hotSpotManager.processHit( point );
 			for ( TileViewEventListener listener : tileViewEventListeners ) {

@@ -531,6 +531,13 @@ public class TileView extends ZoomPanLayout {
 		}
 		return false;
 	}
+
+	/**
+     * Remove all callouts.
+     */
+    public void removeAllCallouts() {
+        calloutManager.clear();
+    }
 	
 	/**
 	 * Register a HotSpot that should fire an listener when a touch event occurs that intersects that rectangle.
@@ -864,7 +871,6 @@ public class TileView extends ZoomPanLayout {
 		}
 		@Override
 		public void onTap( Point point ) {
-			calloutManager.clear();
 			markerManager.processHit( point );
 			hotSpotManager.processHit( point );
 			for ( TileViewEventListener listener : tileViewEventListeners ) {

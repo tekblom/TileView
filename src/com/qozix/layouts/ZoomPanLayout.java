@@ -432,18 +432,40 @@ public class ZoomPanLayout extends ViewGroup {
 	//------------------------------------------------------------------------------------
 	// PRIVATE/PROTECTED
 	//------------------------------------------------------------------------------------
-	
-	@Override
-	protected void onMeasure( int widthMeasureSpec, int heightMeasureSpec ) {
-		measureChildren( widthMeasureSpec, heightMeasureSpec );
-		int w = clip.getMeasuredWidth();
-		int h = clip.getMeasuredHeight();
-		w = Math.max( w, getSuggestedMinimumWidth() );
-		h = Math.max( h, getSuggestedMinimumHeight() );
-		w = resolveSize( w, widthMeasureSpec );
-		h = resolveSize( h, heightMeasureSpec );
-		setMeasuredDimension( w, h );
-	}
+
+    @Override
+    protected void onMeasure( int widthMeasureSpec, int heightMeasureSpec ) {
+        try {
+            measureChildren( widthMeasureSpec, heightMeasureSpec );
+            int w = clip.getMeasuredWidth();
+            int h = clip.getMeasuredHeight();
+            w = Math.max( w, getSuggestedMinimumWidth() );
+            h = Math.max( h, getSuggestedMinimumHeight() );
+            w = resolveSize( w, widthMeasureSpec );
+            h = resolveSize( h, heightMeasureSpec );
+            setMeasuredDimension( w, h );
+        } catch (NullPointerException e ) {
+            Log.e("Markers.onMeasure", "Number of childs " + getChildCount() + " ");
+            e.printStackTrace();
+
+            int width = 0;
+            int height = 0;
+
+            height = Math.max(height, getSuggestedMinimumHeight());
+            width = Math.max(width, getSuggestedMinimumWidth());
+            width = resolveSize(width, widthMeasureSpec);
+            height = resolveSize(height, heightMeasureSpec);
+            setMeasuredDimension(width, height);
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                if (child != null) {
+                    //Log.e("Markers.onMeasure", "Child name " + i + " " + child.getTag() + " ");
+                } else {
+                    Log.e("Markers.onMeasure", "Child " + i + " was null");
+                }
+            }
+        }
+    }
 
 	@Override
 	protected void onLayout( boolean changed, int l, int t, int r, int b ) {

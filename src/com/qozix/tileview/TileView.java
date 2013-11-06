@@ -533,13 +533,6 @@ public class TileView extends ZoomPanLayout {
 	}
 
 	/**
-     * Remove all callouts.
-     */
-    public void removeAllCallouts() {
-        calloutManager.clear();
-    }
-	
-	/**
 	 * Register a HotSpot that should fire an listener when a touch event occurs that intersects that rectangle.
 	 * The HotSpot moves and scales with the TileView.
 	 * @param hotSpot (HotSpot) the hotspot that is tested against touch events that occur on the TileView
@@ -908,7 +901,14 @@ public class TileView extends ZoomPanLayout {
 	//------------------------------------------------------------------------------------
 	// Public static interfaces and classes
 	//------------------------------------------------------------------------------------
-	
+
+    /**
+     * Remove callouts.
+     */
+    public void removeAllCallouts() {
+        calloutManager.clear();
+    }
+
 	/**
 	 * Interface for implementations to receive TileView events.  This interface consolidates several disparate
 	 * listeners (Gestures, ZoomPan Events, TileView events) into a single unit for ease of use.
